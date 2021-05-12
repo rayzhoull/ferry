@@ -2,7 +2,7 @@ script:
   path: ./static/scripts
 settings:
   application:
-    domain: localhost:8002
+    domain: localhost:8001
     host: 0.0.0.0
     ishttps: false
     mode: dev
@@ -12,11 +12,11 @@ settings:
     writertimeout: 2
   database:
     dbtype: mysql
-    host: 127.0.0.1
+    host: 115.231.27.114
     name: ferry
-    password: your password
-    port: 3306
-    username: ferry
+    password: 8estv0ip!
+    port: 33306
+    username: root
   domain:
     gethost: 1
     url: localhost:9527
@@ -55,7 +55,7 @@ settings:
   public:
     islocation: 0
   redis:
-    url: redis://127.0.0.1:6379
+    url: redis://115.231.27.114:36379
   ssl:
     key: keystring
     pem: temp/pem.pem

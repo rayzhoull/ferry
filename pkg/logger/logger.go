@@ -18,6 +18,11 @@ import (
 // error logger
 var log *zap.SugaredLogger
 
+func init() {
+	l, _ := zap.NewDevelopment()
+	log = l.Sugar()
+}
+
 var levelMap = map[string]zapcore.Level{
 	"debug":  zapcore.DebugLevel,
 	"info":   zapcore.InfoLevel,

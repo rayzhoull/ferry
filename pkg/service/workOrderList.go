@@ -165,6 +165,7 @@ func (w *WorkOrder) WorkOrderList() (result interface{}, err error) {
 				authStatus = true
 			}
 
+			fmt.Printf("%+v\n", StateList)
 			processorList := make([]int, 0)
 			if len(StateList) > 1 {
 				for _, s := range StateList {
@@ -180,15 +181,20 @@ func (w *WorkOrder) WorkOrderList() (result interface{}, err error) {
 				}
 			}
 			if len(processorList) == 0 {
-				for _, v := range StateList[0]["processor"].([]interface{}) {
-					processorList = append(processorList, int(v.(float64)))
+				if StateList[0]["processor"] != nil {
+					for _, v := range StateList[0]["processor"].([]interface{}) {
+						processorList = append(processorList, int(v.(float64)))
+					}
 				}
 				stateName = StateList[0]["label"].(string)
 			}
-			principals, err = GetPrincipal(processorList, StateList[0]["process_method"].(string))
-			if err != nil {
-				err = fmt.Errorf("查询处理人名称失败，%v", err.Error())
-				return
+
+			if  StateList[0]["process_method"] != nil {
+				principals, err = GetPrincipal(processorList, StateList[0]["process_method"].(string))
+				if err != nil {
+					err = fmt.Errorf("查询处理人名称失败，%v", err.Error())
+					return
+				}
 			}
 		}
 		workOrderDetails := *result.(*pagination.Paginator).Data.(*[]workOrderInfo)
