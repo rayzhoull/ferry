@@ -544,6 +544,9 @@ func (h *Handle) HandleWorkOrder(
 	breakTag:
 		for _, edge := range sourceEdges {
 			edgeCondExpr := make([]map[string]interface{}, 0)
+			if edge["conditionExpression"] == nil {
+				continue
+			}
 			err = json.Unmarshal([]byte(edge["conditionExpression"].(string)), &edgeCondExpr)
 			if err != nil {
 				return
